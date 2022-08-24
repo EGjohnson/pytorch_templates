@@ -1,16 +1,17 @@
 import torch
 from torch.utils.data import Dataset
 
-class transform_sample(self,addx=1,multy=1):
+class TransformSample(object):
     def __init__(self, scale_data=10, scale_label=5):
         self.scale_data = scale_data
         self.scale_label = scale_label
     def __call__(self,sample):
-        data = sample[0] * scale_data
-        label = sample[1] * scale_label
+        data = sample[0] * self.scale_data
+        label = sample[1] * self.scale_label
+        return (data,label)
         
 
-class mock_data(Dataset):
+class MockData(Dataset):
     def __init__(self, length=100, transform=None):
         """init mock data"""
         # data 
@@ -30,3 +31,14 @@ class mock_data(Dataset):
     
     def __len__(self):
         return self.length
+    
+    
+def main():
+    transform = TransformSample()
+    mock_data = MockData(100, transform = transform)
+    print(mock_data[1]) 
+    
+
+if __name__ == "__main__":
+    main()
+    
