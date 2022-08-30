@@ -3,6 +3,7 @@ from torch.utils.data import Dataset
 
 class TransformSample(object):
     def __init__(self, scale_data=10, scale_label=5):
+        """ init transformation for data"""
         self.scale_data = scale_data
         self.scale_label = scale_label
     def __call__(self,sample):
